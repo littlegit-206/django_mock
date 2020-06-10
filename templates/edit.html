@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gentelella Alela! | </title>
+
+    <!-- Bootstrap -->
+    <link href="/static/gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/static/gentelella-master/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/static/gentelella-master/vendors/nprogress/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="/static/gentelella-master/build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <!-- page content -->
+        <div class="right_col" role="main" style="margin-left: -20px">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Form Validation</h3>
+                    </div>
+
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Form validation <small>sub title</small></h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-expanded="false"><i
+                                                class="fa fa-wrench"></i></a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Settings 1</a>
+                                            <a class="dropdown-item" href="#">Settings 2</a>
+                                        </div>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <form class="" action="/record_add/" method="post" novalidate onsubmit="return false;">
+                                    {% csrf_token %}
+                                    <p>For alternative validation library <code>parsleyJS</code> check out in the <a
+                                            href="form.html">form page</a>
+                                    </p>
+                                    <span class="section">接口信息</span>
+
+
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3  label-align">项目名称<span
+                                                class="required">*</span></label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input class="form-control" data-validate-length-range="6"
+                                                   data-validate-words="2" id="project_name" name="project_name"
+                                                   placeholder="请输入项目名称" required="required" value="{{ data.project_name }}"/>
+                                        </div>
+                                    </div>
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3  label-align">接口名称<span
+                                                class="required">*</span></label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input class="form-control" class='optional' name="api_name" id="api_name"
+                                                   type="text" value="{{ data.inter_name }}"/></div>
+                                    </div>
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3  label-align">描述<span
+                                                class="required">*</span></label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <textarea required="required" name='api_message' id='api_message'
+                                                      data-validate-length-range="5,15" >{{ data.inter_describe }}</textarea></div>
+                                    </div>
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3  label-align">接口URL<span
+                                                class="required">*</span></label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input class="form-control" name="api_url" id="api_url"
+                                                   required='required' value="{{ data.inter_url }}"/></div>
+                                    </div>
+
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3  label-align">请求方法<span
+                                                class="required" >*</span></label>
+                                        <div class="col-md-3 col-sm-3 ">
+                                            <select class="form-control" required="required" name='menth' id='menth'  >
+                                                <option>{{ data.inter_menth }}</option>
+                                                <option>GET</option>
+                                                <option>POST</option>
+                                                <option>PUT</option>
+                                                <option>DELETE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3  label-align">请求参数<span
+                                                class="required">*</span></label>
+                                        <div class="col-md-5 col-sm-12">
+                                            <textarea required="required" name='api_re_message'
+                                                      id='api_re_message'>{{ data.inter_data }}</textarea></div>
+                                    </div>
+
+
+                                    <div class="ln_solid">
+                                        <div class="form-group">
+                                            <div class="col-md-6 offset-md-3">
+                                                <button type='submit' class="btn btn-primary" onclick="SaveAction()">
+                                                    保存
+                                                </button>
+                                                <button type='reset' class="btn btn-success"
+                                                        onclick=window.history.go(-1);>取消
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+    </div>
+</div>
+
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/static/gentelella-master/vendors/validator/multifield.js"></script>
+<script src="/static/gentelella-master/vendors/validator/validator.js"></script>
+
+<script>
+    // initialize a validator instance from the "FormValidator" constructor.
+    // A "<form>" element is optionally passed as an argument, but is not a must
+    var validator = new FormValidator({"events": ['blur', 'input', 'change']}, document.forms[0]);
+    // on form "submit" event
+    document.forms[0].onsubmit = function (e) {
+        var submit = true,
+            validatorResult = validator.checkAll(this);
+        console.log(validatorResult);
+        return !!validatorResult.valid;
+    };
+    // on form "reset" event
+    document.forms[0].onreset = function (e) {
+        validator.reset();
+    };
+    // stuff related ONLY for this demo page:
+    $('.toggleValidationTooltips').change(function () {
+        validator.settings.alerts = !this.checked;
+        if (this.checked)
+            $('form .alert').remove();
+    }).prop('checked', false);
+</script>
+
+<!-- jQuery -->
+<script src="/static/gentelella-master/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/static/gentelella-master/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FastClick -->
+<script src="/static/gentelella-master/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="/static/gentelella-master/vendors/nprogress/nprogress.js"></script>
+<!-- validator -->
+<!-- <script src="/static/gentelella-master/vendors/validator/validator.js"></script> -->
+
+<!-- Custom Theme Scripts -->
+<script src="/static/gentelella-master/build/js/custom.min.js"></script>
+
+<script>
+    function SaveAction() {
+        // 通过id获取到表单的值
+        var project_name = $('#project_name').val(),
+            api_name = $('#api_name').val(),
+            api_message = $('#api_message').val(),
+            api_url = $('#api_url').val(),
+            menth = $('#menth').val(),
+            api_re_message = $('#api_re_message').val();
+        // 组合成数据对象{key:value}key对应后端数据字段
+        var data = {
+            "project_name": project_name,
+            "api_name": api_name,
+            "api_message": api_message,
+            "api_url": api_url,
+            "menth": menth,
+            "api_re_message": api_re_message,
+        }
+        $.ajax({
+            type: 'POST',
+            url: '../record_add/',
+            headers: {"X-CSRFToken": $('[name="csrfmiddlewaretoken"]').val()},
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: 'application-json;charset=UTF-8',
+            async: true,
+            success: function (data) {
+                window.location.href = "../idetail/"
+
+            },
+            error: function (e) {
+                console.log("新增接口数据失败" + e)
+            }
+        });
+    }
+
+
+</script>
+</body>
+
+</html>

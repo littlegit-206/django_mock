@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gentelella Alela! | </title>
+
+    <!-- Bootstrap -->
+    <link href="/static/gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/static/gentelella-master/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/static/gentelella-master/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="/static/gentelella-master/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="/static/gentelella-master/build/css/custom.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style
+    <link href="/static/bootstrap/css/layer.css" rel="stylesheet">
+    -->
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <!-- page content -->
+
+        <div class="right_col" role="main" style="margin-left: -20px">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Tables <small>接口列表详情</small></h3>
+                    </div>
+
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row" style="display: block;">
+                    <div class="col-md-12 col-sm-12  ">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Table design <small>Custom design</small></h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Settings 1</a>
+                                            <a class="dropdown-item" href="#">Settings 2</a>
+                                        </div>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+
+                                <p>Add class <code>bulk_action</code> to table for bulk actions options on row select
+                                    <button type="button" class="btn btn-round btn-success">
+                                        <a href="../edit">新增</a>
+                                    </button>
+                                </p>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                        <tr class="headings">
+                                            <th>
+                                                <input type="checkbox" id="check-all" class="flat">
+                                            </th>
+                                            <th class="column-title">项目名称</th>
+                                            <th class="column-title">接口名称</th>
+                                            <th class="column-title">描述</th>
+                                            <th class="column-title">接口URL</th>
+                                            <th class="column-title">方法</th>
+                                            <th class="column-title">参数</th>
+                                            <th class="column-title">状态</th>
+                                            <th class="column-title">创建者</th>
+                                            <th class="column-title no-link last"><span class="nobr">操作</span>
+                                            </th>
+                                            <th class="bulk-actions" colspan="5">
+                                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions (
+                                                    <span class="action-cnt"> </span> ) <i
+                                                            class="fa fa-chevron-down"></i></a>
+                                            </th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        {% for line in inter_list %}
+                                            <tr class="even pointer" id={{ line.id }}>
+                                                <td class="a-center "><input type="checkbox" class="flat"
+                                                                             name="table_records"></td>
+                                                <td class=" ">{{ line.project_name }}</td>
+                                                <td class=" ">{{ line.inter_name }}</td>
+                                                <td class=" ">{{ line.inter_describe }}</td>
+                                                <td class=" ">{{ line.inter_url }} </td>
+                                                <td class=" ">{{ line.inter_menth }}</td>
+                                                <td class=" ">{{ line.inter_data }}</td>
+                                                {% if line.status == '0' %}
+                                                    <td class=" ">停用</td>
+                                                {% else %}
+                                                    <td class=" ">启用</td>
+                                                {% endif %}
+
+                                                <td class=" ">{{ line.creater }}</td>
+                                                <td class="last">
+                                                    <button type="button" class="btn btn-link"
+                                                            onclick=window.location.href="../edit/"+{{ line.id }}>
+                                                        <span>编辑</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-link"
+                                                            onclick="DeleteAction(this, {{ line.id }})">
+                                                        <span>删除</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-link"
+                                                            onclick="StopOrOpenAction(this, {{ line.id }},{{ line.status }})">
+                                                        {% if line.status == '0' %}
+                                                            <span>启用</span>
+                                                        {% else %}
+                                                            <span>停用</span>
+                                                        {% endif %}
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="table-responsive">
+                                    <!--底部分页按钮显示-->
+                                    <nav aria-label="Page navigation">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                                            <ul class="pagination">
+                                                {% if page.has_previous %}
+                                                    <li><a href="../idetail/{{ page.previous_page_number }}"
+                                                           aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span></a></li>
+                                                {% endif %}
+
+                                                {% for num in page.paginator.page_range %}
+                                                    {% if pindex == page.number %}
+                                                        <li><a href="">{{ num }}</a></li>
+                                                    {% else %}
+                                                        <li><a href="../idetail/{{ num }}">{{ num }}</a></li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if page.has_next %}
+                                                    <li><a href="../idetail/{{ page.next_page_number }}"
+                                                           aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span></a></li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /page content -->
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="/static/gentelella-master/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/static/gentelella-master/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FastClick -->
+<script src="/static/gentelella-master/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="/static/gentelella-master/vendors/nprogress/nprogress.js"></script>
+<!-- iCheck -->
+<script src="/static/gentelella-master/vendors/iCheck/icheck.min.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="/static/gentelella-master/build/js/custom.min.js"></script>
+<script src="/static/bootstrap/layer/layer.js"></script>
+
+<script>
+    function DeleteAction(the, line_id) {
+        // var article_name = $(the).parents("tr").children("td").eq(1).text();
+        layer.open({
+            type: 1,
+            skin: "layui-layer-rim",
+            area: ["400px", "200px"],
+            title: "删除接口",
+            content: '<div class="text-center" style="margin-top:20px"><p>是否确定删除?</p></div>',
+            btn: ['确定', '取消'],
+            yes: function () {
+                $.ajax({
+                    url: '../delete/',
+                    type: "POST",
+                    data: {"api_id": line_id},
+                    success: function (e) {
+                        layer.msg("删除成功", {icon: 1, time: 1000}, function () {
+                            location.reload();
+                        });
+                    },
+                    error: function (e) {
+                        layer.msg("删除失败");
+                    }
+                })
+            },
+        });
+    }
+
+    function StopOrOpenAction(the, api_id, status_id) {
+        layer.open({
+            type: 1,
+            skin: "layui-layer-rim",
+            area: ["400px", "200px"],
+            title: "停用/启用接口",
+            content: '<div class="text-center" style="margin-top:20px"><p>是否停用/启用?</p></div>',
+            btn: ['确定', '取消'],
+            yes: function () {
+                $.ajax({
+                    url: '../StopOrOpen/',
+                    type: "POST",
+                    data: {"api_id": api_id, "status_id": status_id},
+                    success: function (e) {
+                        layer.msg("停用/启用成功", {icon: 1, time: 1000}, function () {
+                            location.reload();
+                        });
+                    },
+                    error: function (e) {
+                        layer.msg("停用/启用失败");
+                    }
+                })
+            },
+        });
+
+    }
+
+    function EditAction(the, api_id) {
+        $.ajax({
+            url: '../edit/' + api_id,
+            type: "GET",
+            success: function (data) {
+                window.location.href = "../edit/"
+            },
+            error: function (e) {
+                window.location.href = "../edit/"
+            }
+        })
+
+    }
+
+</script>
+</body>
+</html>
